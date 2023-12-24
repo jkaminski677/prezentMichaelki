@@ -27,6 +27,10 @@ body {
   }
 
   #start-container {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
     text-align: center;
     padding: 15px;
     margin-top: -80px;
@@ -154,6 +158,10 @@ body {
 }
 
 #dalej{
+    display: none;
+}
+
+#dalej2{
     display: none;
 }
 

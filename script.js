@@ -10,13 +10,6 @@ function rozpocznijGre() {
     // Tutaj możesz dodać logikę dla pierwszego zadania
   }
 
-//   function rozpocznijGre() {
-//     // Schowaj start-container i pokaż game-container
-//     document.getElementById('start-container').style.display = 'none';
-//     document.getElementById('game-container').style.display = 'block';
-
-//     // Tutaj możesz dodać logikę dla pierwszego zadania
-//   }
 
 function otworzPrezent() {
     // Schowaj start-container i pokaż game-container
@@ -226,8 +219,9 @@ const questions = [
 ];
 
 let currentQuestionIndex = 0;
-let userScore = 0;
+let userScore = localStorage.getItem("userScore") || 0;
 let userAnswered = false; // Dodana zmienna, aby sprawdzić, czy użytkownik już odpowiedział
+
 
 function loadQuestion() {
     const currentQuestion = questions[currentQuestionIndex];
@@ -280,14 +274,19 @@ function checkAnswer(selectedIndex) {
     } else {
         setTimeout(() => {
             showResult();
-        }, 2000); // Po 1,5 sekundy pokaż wynik
+            saveScoreToLocalStorage();
+        }, 1500); // Po 1,5 sekundy pokaż wynik
     }
+}
+
+function saveScoreToLocalStorage() {
+    localStorage.setItem("userScore", userScore);
 }
 
 function showResult() {
     const resultContainer = document.getElementById("result-container");
     resultContainer.textContent = `Twój wynik: ${userScore} / ${questions.length}`;
-    document.getElementById('dalej').style.display = 'block';
+    document.getElementById('dalej2').style.display = 'block';
 }
 
 function nextQuestion() {
@@ -299,6 +298,7 @@ function nextQuestion() {
     // } else {
     //     showResult();
     // }
+    document.getElementById('start-container').style.display = 'none';
     document.getElementById('quiz-container').style.display = 'none';
     document.getElementById('game-container').style.display = 'block';
 }
@@ -313,3 +313,14 @@ function resetOptions() {
 
 // Inicjalizacja pierwszego pytania
 loadQuestion();
+
+// Wyświetl poprzedni wynik zapisany w localStorage od razu po otwarciu strony
+const savedScore = localStorage.getItem("userScore");
+if (savedScore !== null && savedScore !== undefined) {
+    const resultContainer = document.getElementById("start-container");
+    const previousResultElement = document.createElement("div");
+    previousResultElement.textContent = `Poprzedni wynik: ${savedScore} / ${questions.length}`;
+    resultContainer.appendChild(previousResultElement);
+    userScore = 0;
+    document.getElementById('dalej').style.display = 'block';
+}
