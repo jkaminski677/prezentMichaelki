@@ -9,7 +9,10 @@ function rozpocznijGre() {
 function otworzPrezent() {
     // Schowaj start-container i pokaż game-container
     document.getElementById('game-container').style.display = 'none';
-    document.getElementById('otworzPrezent').style.display = 'block';
+    document.getElementById('otworzPrezent').style.display = 'flex';
+    document.getElementById('otworzPrezent').style.flexDirection = 'column' ;
+    document.getElementById('otworzPrezent').style.justifyContent = 'flex-start' ;
+    document.getElementById('otworzPrezent').style.alignItems = 'center' ;
 
     // Tutaj możesz dodać logikę dla pierwszego zadania
   }
@@ -102,32 +105,32 @@ function swapTiles(cell1,cell2) {
 
 // BLOKADA interakcji na stronie
 
-// function delayedExecution() {
-//     // Ustawienie opóźnienia na 3000 milisekund (czyli 3 sekundy)
-//     setTimeout(shuffle, 2500);
-// }
+function delayedExecution() {
+    // Ustawienie opóźnienia na 3000 milisekund (czyli 3 sekundy)
+    setTimeout(shuffle, 2500);
+}
 
-// // Funkcja wstrzymująca interakcje na stronie przez określony czas
-// function disableInteractionsForSeconds(seconds) {
-//     // Utwórz warstwę z nakładką
-//     var overlay = document.createElement('div');
-//     overlay.style.position = 'fixed';
-//     overlay.style.top = '0';
-//     overlay.style.left = '0';
-//     overlay.style.width = '100%';
-//     overlay.style.height = '100%';
-//     overlay.style.background = 'rgba(0, 0, 0, 0)'; // Przezroczyste tło
-//     overlay.style.zIndex = '9999';
+// Funkcja wstrzymująca interakcje na stronie przez określony czas
+function disableInteractionsForSeconds(seconds) {
+    // Utwórz warstwę z nakładką
+    var overlay = document.createElement('div');
+    overlay.style.position = 'fixed';
+    overlay.style.top = '0';
+    overlay.style.left = '0';
+    overlay.style.width = '100%';
+    overlay.style.height = '100%';
+    overlay.style.background = 'rgba(0, 0, 0, 0)'; // Przezroczyste tło
+    overlay.style.zIndex = '9999';
 
-//     // Dodaj warstwę z nakładką do body
-//     document.body.appendChild(overlay);
+    // Dodaj warstwę z nakładką do body
+    document.body.appendChild(overlay);
 
-//     // Po określonym czasie usuń warstwę z nakładką
-//     setTimeout(function() {
-//         overlay.parentNode.removeChild(overlay);
-//     }, seconds * 1000);
-// }
+    // Po określonym czasie usuń warstwę z nakładką
+    setTimeout(function() {
+        overlay.parentNode.removeChild(overlay);
+    }, seconds * 1000);
+}
 
-// // Użycie funkcji do wstrzymania interakcji na stronie przez 3 sekundy
-// disableInteractionsForSeconds(3);
+// Użycie funkcji do wstrzymania interakcji na stronie przez 3 sekundy
+disableInteractionsForSeconds(3);
 
