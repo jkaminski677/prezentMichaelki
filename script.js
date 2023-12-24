@@ -1,7 +1,11 @@
 function rozpocznijGre() {
     // Schowaj start-container i pokaż game-container
     document.getElementById('start-container').style.display = 'none';
-    document.getElementById('quiz-container').style.display = 'block';
+    // document.getElementById('quiz-container').style.display = 'block';
+    document.getElementById('quiz-container').style.display = 'flex';
+    document.getElementById('quiz-container').style.flexDirection = 'column' ;
+    document.getElementById('quiz-container').style.justifyContent = 'flex-start' ;
+    document.getElementById('quiz-container').style.alignItems = 'center'
 
     // Tutaj możesz dodać logikę dla pierwszego zadania
   }
