@@ -1,10 +1,18 @@
 function rozpocznijGre() {
     // Schowaj start-container i pokaż game-container
     document.getElementById('start-container').style.display = 'none';
-    document.getElementById('game-container').style.display = 'block';
+    document.getElementById('quiz-container').style.display = 'block';
 
     // Tutaj możesz dodać logikę dla pierwszego zadania
   }
+
+//   function rozpocznijGre() {
+//     // Schowaj start-container i pokaż game-container
+//     document.getElementById('start-container').style.display = 'none';
+//     document.getElementById('game-container').style.display = 'block';
+
+//     // Tutaj możesz dodać logikę dla pierwszego zadania
+//   }
 
 function otworzPrezent() {
     // Schowaj start-container i pokaż game-container
@@ -107,7 +115,7 @@ function swapTiles(cell1,cell2) {
 
 function delayedExecution() {
     // Ustawienie opóźnienia na 3000 milisekund (czyli 3 sekundy)
-    setTimeout(shuffle, 2500);
+    setTimeout(shuffle, 1500);
 }
 
 // Funkcja wstrzymująca interakcje na stronie przez określony czas
@@ -132,5 +140,172 @@ function disableInteractionsForSeconds(seconds) {
 }
 
 // Użycie funkcji do wstrzymania interakcji na stronie przez 3 sekundy
-disableInteractionsForSeconds(3);
+// disableInteractionsForSeconds(2);
 
+
+
+
+
+
+
+// ////////////////////////// QUIZ /////////////////////////////////
+
+
+
+const questions = [
+    {
+        question: "Czym jest Boże Narodzenie?",
+        answers: ["Święto upamiętniające narodzenie Jezusa", "Święto z okazji narodzenia Boga", "Święto z okazji przybycia Świętego Mikołaja"],
+        correctAnswerIndex: 0
+    },
+    {
+        question: "Kiedy obchodzone jest w Polsce Boże Narodzenie?",
+        answers: ["24 grudnia", "25 grudnia", "26 grudnia"],
+        correctAnswerIndex: 1
+    },
+    {
+        question: "Z jakich wierzeń pierwotnie pochodzi Wigilia Bożego Narodzenia?",
+        answers: ["Chrześcijańskich", "Żydowskich", "Słowiańskich"],
+        correctAnswerIndex: 2
+    },
+    {
+        question: "Kiedy rozpoczyna się Wigilię?",
+        answers: ["Gdy jest już ciemno", "Gdy na niebie pojawi się pierwsza gwiazdka", "O godzinie 18"],
+        correctAnswerIndex: 1
+    },
+    {
+        question: "Kto był pierwowzorem Świętego Mikołaja?",
+        answers: ["Biskup Miry", "Jezus Chrystus", "Gwiazdor"],
+        correctAnswerIndex: 0
+    },
+    {
+        question: "Ile według tradycji powinno być potraw na wigilijnym stole?",
+        answers: ["Nieparzysta liczba", "12", "24"],
+        correctAnswerIndex: 1
+    },
+    {
+        question: "Kiedy zwierzęta przemawiają ludzkim głosem?",
+        answers: ["W Wigilię", "W Boże Narodzenie", "W Wielkanoc"],
+        correctAnswerIndex: 0
+    },
+    {
+        question: "Który utwór NIE JEST kolędą?",
+        answers: ["'Cicha noc'", "'Wśród nocnej ciszy'", "'Jest taki dzień'"],
+        correctAnswerIndex: 2
+    },
+    {
+        question: "Kto stworzył pierwszą szopkę?",
+        answers: ["Jan Paweł II", "Franciszek z Asyżu", "Matka Teresa"],
+        correctAnswerIndex: 1
+    },
+    {
+        question: "W którym wieku pojawił się zwyczaj całowania pod jemiołą?",
+        answers: ["XII wiek", "XIX wiek", "XXI wiek"],
+        correctAnswerIndex: 1
+    },
+    {
+        question: "Ile czasu trwa adwent?",
+        answers: ["Cztery tygodnie", "Cztery dni", "Cztery miesiące"],
+        correctAnswerIndex: 0
+    },
+    {
+        question: "Kogo patronem jest Święty Mikołaj?",
+        answers: [ "Żeglarzy, piekarzy, kupców oraz więźniów", "Dzieci, bezdomnych i schorowanych", "Dzieci, reniferów i zimy"],
+        correctAnswerIndex: 0
+    },
+    {
+        question: "W którym kraju wymyślono zdobienie drzewek?",
+        answers: ["W Polsce", "W USA", "W Niemczech"],
+        correctAnswerIndex: 2
+    },
+    // Dodaj kolejne pytania według potrzeb
+];
+
+let currentQuestionIndex = 0;
+let userScore = 0;
+let userAnswered = false; // Dodana zmienna, aby sprawdzić, czy użytkownik już odpowiedział
+
+function loadQuestion() {
+    const currentQuestion = questions[currentQuestionIndex];
+    const questionContainer = document.getElementById("question-container");
+    const optionsContainer = document.getElementById("options-container");
+
+    questionContainer.textContent = currentQuestion.question;
+    optionsContainer.innerHTML = "";
+
+    currentQuestion.answers.forEach((answer, index) => {
+        const option = document.createElement("div");
+        option.classList.add("option");
+        option.textContent = answer;
+        option.onclick = () => checkAnswer(index);
+        optionsContainer.appendChild(option);
+    });
+}
+
+function checkAnswer(selectedIndex) {
+    if (userAnswered) {
+        return; // Jeśli użytkownik już odpowiedział, nie pozwól mu ponownie zaznaczyć odpowiedzi
+    }
+
+    userAnswered = true;
+
+    const currentQuestion = questions[currentQuestionIndex];
+    const options = document.querySelectorAll(".option");
+
+    options.forEach((option, index) => {
+        if (index === currentQuestion.correctAnswerIndex) {
+            option.classList.add("correct");
+        } else {
+            option.classList.add("incorrect");
+        }
+
+        option.onclick = null; // Wyłącz obsługę kliknięć po udzieleniu odpowiedzi
+    });
+
+    if (selectedIndex === currentQuestion.correctAnswerIndex) {
+        userScore++;
+    }
+
+    if (currentQuestionIndex < questions.length - 1) {
+        currentQuestionIndex++;
+        setTimeout(() => {
+            resetOptions();
+            loadQuestion();
+            userAnswered = false; // Resetuj zmienną po załadowaniu nowego pytania
+        }, 1500); // Po 1,5 sekundy przechodź do następnego pytania
+    } else {
+        setTimeout(() => {
+            showResult();
+        }, 2000); // Po 1,5 sekundy pokaż wynik
+    }
+}
+
+function showResult() {
+    const resultContainer = document.getElementById("result-container");
+    resultContainer.textContent = `Twój wynik: ${userScore} / ${questions.length}`;
+    document.getElementById('dalej').style.display = 'block';
+}
+
+function nextQuestion() {
+    // if (currentQuestionIndex < questions.length - 1) {
+    //     currentQuestionIndex++;
+    //     resetOptions();
+    //     loadQuestion();
+    //     userAnswered = false; // Resetuj zmienną po załadowaniu nowego pytania
+    // } else {
+    //     showResult();
+    // }
+    document.getElementById('quiz-container').style.display = 'none';
+    document.getElementById('game-container').style.display = 'block';
+}
+
+function resetOptions() {
+    const options = document.querySelectorAll(".option");
+    options.forEach(option => {
+        option.classList.remove("correct", "incorrect");
+        option.onclick = () => checkAnswer(Array.from(options).indexOf(option));
+    });
+}
+
+// Inicjalizacja pierwszego pytania
+loadQuestion();

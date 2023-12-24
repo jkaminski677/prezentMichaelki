@@ -16,12 +16,14 @@
     <div id="start-container">
         <h1>Witaj Michaelko!</h1>
         <p>🎄✨ Aby otworzyć prezent musisz pokonać magiczną przygodę.🎁🕵️‍♀️ <br> Przed Tobą świąteczna łamigłówka!  <br> Czy jesteś gotowa? 😎</p>
-        <button class="btn btn-primary but-margin" onclick="rozpocznijGre(), delayedExecution(), disableInteractionsForSeconds(3)">Rozpocznij</button>
-        </div>
+        <!-- <button class="btn btn-primary but-margin" onclick="rozpocznijGre(), delayedExecution(), disableInteractionsForSeconds(2)">Rozpocznij</button> -->
+        <button class="btn btn-primary but-margin" onclick="rozpocznijGre()">Rozpocznij</button>
 
-        <div id="game-container">
+    </div>
+
+    <div id="game-container">
         <!-- Tutaj dodaj elementy związane z pierwszym zadaniem -->
-        <h2>🎅🤶 Zadanie 1 🎅🤶</h2>
+        <h2>🎅🤶 Finał 🎅🤶</h2>
         <p>Ustaw kafelki w taki sposób aby wyszedł normalny obrazek :)</p>
         <!-- Dodaj przycisk lub elementy do interakcji z grą -->
         <center><div id="table" style="display: table;">
@@ -46,11 +48,28 @@
                 <h2 id="nextLev">Gratulacje! Układanka ułożona poprawnie!</h2>
                 <button class="btn btn-primary but-margin" onClick="otworzPrezent()">Otwórz prezent</button>
             </div>
-
         </center>
-
-
     </div>
+
+
+
+
+    <div id="quiz-container">
+        <div id="question-container"></div>
+        <div id="options-container"></div>
+        <div id="result-container"></div>
+        <button id="dalej" class="btn btn-primary but-margin" onclick="nextQuestion(), delayedExecution(), disableInteractionsForSeconds(2)">Następne zadanie</button>
+    </div>
+
+
+
+
+
+
+
+
+
+
 
     <div id="otworzPrezent">
         <h2>🎁🎄 <br> Wesołych świąt Bożego Narodzenia!!! <br> 🎄🎁</h2>
@@ -58,6 +77,8 @@
         <p>Napisz do Aniołka, a prezencik sam przyjdzie na Twojego maila, jeśli już nie przyszedł!!! <br>
         Wesołych świąt Kochanie! 😘🎅 </p>
     </div>
+
+
 
     <div class="snowflakes" aria-hidden="true">
         <div class="snowflake">

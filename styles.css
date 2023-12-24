@@ -44,6 +44,10 @@ body {
     /* Dodaj odpowiednie style dla obszaru gry */
   }
 
+  #quiz-container{
+    text-align: center;
+  }
+
   #otworzPrezent{
     display: none;
     text-align: center;
@@ -52,6 +56,10 @@ body {
     z-index: 1;
 
   }
+
+
+
+
 
 
 
@@ -126,3 +134,60 @@ body {
     font-family: 'Raleway', sans-serif;
   color: #000;		
   }
+
+
+
+
+
+
+
+
+
+
+
+
+#quiz-container {
+    display: none;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#dalej{
+    display: none;
+}
+
+#question-container {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+#options-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.option {
+    margin: 5px;
+    padding: 10px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.option:hover {
+    background-color: #757575;
+}
+
+#result-container {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.correct {
+    background-color: #8bc34a; /* Zielony kolor dla poprawnej odpowiedzi */
+}
+
+.incorrect {
+    background-color: #ff5722; /* Czerwony kolor dla błędnej odpowiedzi */
+}
